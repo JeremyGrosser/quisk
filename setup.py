@@ -1,14 +1,8 @@
 from distutils.core import setup, Extension
 import sys
 
-# You must define the version here.  A title string including
-# the version will be written to __init__.py and read by quisk.py.
+__version__ = '3.5.4'
 
-Version = '3.5.4'
-
-fp = open("__init__.py", "w")   # write title string
-fp.write("#QUISK version %s\n" % Version)
-fp.close()
 
 if sys.platform == 'win32':
     ext_modules = [
@@ -46,7 +40,7 @@ else:
                 'ext/_quisk/utility.c',
                 'ext/_quisk/filter.c',
                 'ext/_quisk/extdemod.c',
-            ])
+            ]),
         Extension('sdriqpkg.sdriq',
             libraries=[':_quisk.so', 'm'],
             include_dirs=['ext/_quisk'],
@@ -55,7 +49,7 @@ else:
 
 
 setup(name='quisk',
-    version=Version,
+    version=__version__,
     scripts=['src/quisk'],
     description='QUISK, which rhymes with "brisk", is a Software Defined Radio (SDR).',
     long_description="""QUISK is a Software Defined Radio (SDR).  
