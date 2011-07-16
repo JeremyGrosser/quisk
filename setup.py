@@ -42,7 +42,7 @@ else:
                 'ext/_quisk/extdemod.c',
             ]),
         Extension('sdriqpkg.sdriq',
-            libraries=[':_quisk.so', 'm'],
+            libraries=['m'],
             include_dirs=['ext/_quisk'],
             sources=['ext/sdriqpkg/sdriq.c']),
     ]
