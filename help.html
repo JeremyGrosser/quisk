@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>QUISK Help File</title>
+</head>
+<body>
+<h3>
+QUISK Help (January 2011)
+</h3>
+<p>
+The <a href="docs.html">The documentation is here</a>.<br>
+</p>
+<p>This is the Help file for Quisk, a Software Defined Radio (SDR).
+This
+Help appears
+in Quisk when you press the Help button. Quisk is written by Jim
+Ahlstrom, N2ADR,
+www.james.ahlstrom.name. Mail to quisk at james.ahlstrom.name. Quisk
+has been
+greatly improved and extended by Leigh L. Klotz Jr. WA5ZNU,
+and by Andrew Nilsson VK6JBL.
+Thanks to Terry Fox WB4JFI for code improvements, and for adding
+support
+for the Charleston hardware.
+Thanks to Sid Boyce, G3VBV, for sending me SoftRock hardware to work
+with.
+</p>
+<h3>
+What Quisk Can Do
+</h3>
+<p>
+Depending on how you have configured it, Quisk can be used as a
+radio receiver, a transceiver, or a panadapter. When you use Quisk as a
+receiver or panadapter, you supply an antenna, a complex (I/Q) mixer to
+convert radio spectrum to a low IF, and send
+that IF to the left and right inputs of the sound card in your
+computer.
+The Quisk software will read the sound card data, tune it, filter it,
+demodulate it, and send the audio to the same sound card for output to
+external headphones or speakers. For most efficient use, you may wish
+to configure some form of rig control in the your configuration file
+and hardware file.
+</p>
+<p>
+Quisk can also accept I/Q data from the SDR-IQ from RfSpace. The
+selection
+of SDR-IQ or soundcard is made in your configuration file.
+</p>
+<p>
+Quisk rhymes with "brisk", and is QSK plus a few letters to make it
+easier to pronounce. QSK is a Q signal meaning full break in CW
+operation,
+and Quisk has been designed for low latency. Quisk includes an input
+keying signal that can mute the audio and substitute a side tone.
+To install and configure Quisk, please see the docs.html file in the
+Quisk directory.<br>
+</p>
+<p>
+Quisk is designed for QSK CW operation. It is written in Python, an
+easy
+to learn but powerful language; see www.python.org. Source is provided
+because your own hardware is probably different from mine, and you will
+need to change something. Changing Python is easy.
+</p>
+<p>
+There are lots of other SDR projects; see the list at
+http://f4dan.free.fr/sdr_eng.html.
+I particularly recommend Linrad by SM5BSZ, PowerSDR, and SDRadio by
+I2PHD. Reading
+the
+Linrad pages is a great introduction to SDR.
+</p>
+<h3>
+Configuration File
+</h3>
+Quisk first imports all its configuration information from the file
+quisk_conf_defaults.py. Then it reads your configuration file.&nbsp; To
+change your configuration, do
+NOT change quisk_conf_defaults.py, because installing the next version
+will cause your changes to be lost. Instead copy one of the
+sample quisk_conf_*.py to your config file. For a standard
+soundcard, copy quisk_conf_model.py. Make any changes you want to
+your config file. To see what kinds of changes are
+available, read the file quisk_conf_defaults.py. Please do NOT copy
+quisk_conf_defaults.py to your config file. Your config file should
+consist of only the lines that are different from
+quisk_conf_defaults.py,
+and it should be a small file.
+<p></p>
+<p>
+The configuration file also imports your hardware control file. This is
+quisk_hardware_model by default. To use a different
+hardware file add "import quisk_hardware_fixed as quisk_hardware" (for
+SoftRock, or another quisk_hardware_* file) to your configuration
+file. You can control your own hardware either by writing a custom
+hardware file, or by defining a "class Hardware" in your config file.
+See docs.html for details, and read the various hardware files.
+</p>
+<p>
+If you need to add custom controls to Quisk, add "import
+quisk_widgets_mywidgets as quisk_widgets" to your configuration file,
+and see quisk_widgets_n2adr.py. This is an advanced feature, and
+you will need to understand wxPython.
+</p>
+<h3>Testing QUISK
+</h3>
+<p>
+Look at the bottom row of buttons to the right. I guess you found the
+Help
+button, since this is the help screen. Press the Config (configuration)
+button,
+have a look, and then return to Help. If sound is running you should
+see the
+Interrupts count increasing steadily. Some sound card information is
+shown,
+and some error counts. If anything prints in red, something is wrong.
+You must edit the configuration file to change the soundcard name or
+rate.
+There will be different sound card parameters for each name. See
+docs.html for more information, or if you
+can't
+get sound to run. If Interrupts are increasing, the Graph and Waterfall
+screen
+should work too.
+</p>
+<p>
+Next press Graph to look at the graph screen, and then Help to return.
+You may need to run the "Ys" (Y scale) slide control on the right up or
+down
+to see the graph line. You should see a noise trace that changes
+randomly (without sound input). Then press Test1. This generates a test
+signal at 10 kHz, and you should see the spike on the graph. To tune
+to that signal, click the mouse on the graph near the spike. Hold the
+mouse button down and drag the red tuning line back and forth across
+the test signal. You should head a pure audio tone in your speakers.
+Use the "Vol" (Volume) slider on the left to change the volume.<br>
+</p>
+<p>If you press Graph again, you will activate the peak hold functions
+labeled "GraphP1" and "GraphP2".&nbsp; These will cause the graph to
+follow the peak signal, and decay back down at a slow rate.&nbsp; To
+control the rate, use the graph_peak_hold item in the config file.<br>
+</p>
+<p>
+Next press WFall to see the Waterfall screen, then Help to return.
+You can resize the Quisk window to get see more waterfall history.
+You will need to adjust "Ys" (Y scale) and "Yz" (Y zero) to get a
+colored
+display. You should see a strong 10 kHz signal. Press Test1 to turn
+the signal on and off. Watch it appear and disappear from the
+waterfall.
+</p>
+<p>
+The top of the waterfall shows a small graph screen. You can grab the
+bar between the screens with your mouse and move it up and down to
+adjust
+the relative sizes.
+To adjust the scale and zero of this graph, hold down the Shift key
+while
+using the "Ys" and "Yz" sliders.
+</p>
+<p>
+Next press Scope to see an oscilloscope screen. This is mainly useful
+for debugging.
+</p>
+<p>
+Last press Filter and wait a few seconds. The response of the current
+filter is shown. Try changing filters by using the middle row of
+buttons on the right.
+</p>
+<h3>
+Tuning
+</h3>
+<p>
+On the Graph or Waterfall screens, you tune in a CW signal by clicking
+above the X axis directly
+on the signal. You tune in an SSB signal by clicking on the upper edge
+(lower sideband) or the lower edge (upper sideband). That is, you
+always click
+where the carrier goes. Make sure the proper mode is selected with the
+first row of buttons on the right. You can also click, hold down the
+mouse button and drag the tuning line. The speed of tuning is lowest
+close to the X axis, and increases as you move up. Try it.
+</p>
+<p>
+If you click below the X axis, tuning will not jump to that frequency,
+but
+you can still hold the button and drag. That is useful for small
+adjustments.
+The mouse wheel will move the frequency up and down in small
+increments, and round the frequency to multiples of 50 Hertz.
+</p>
+<p>
+If you right-click a signal, Quisk tunes to the signal as before, and
+also
+changes the VFO (if that is possible with your hardware) to move the
+signal to
+the center of the screen.
+</p>
+<p>
+You can type a frequency into the entry box to the right of
+the frequency display, and hit Enter to jump to it. The
+frequency is in Hertz unless it has a decimal point, and then it
+is megahertz.&nbsp;
+The Up and Down buttons do not
+change the tuning, but will move the display up and down the band.
+Hold these buttons down to keep moving.
+</p>
+<p>
+To really perform tuning, you need a VFO controlled by Quisk. I use a
+DDS
+VFO controlled by Ethernet. This DDS has a transmit and receive
+frequency,
+and a key signal to choose which to generate. Quisk (currently) assumes
+a single conversion to audio, as in the SoftRock-40 and FlexRadio 1000
+receivers. If you have a fixed (crystal controlled) first conversion,
+use quisk_hardware_fixed.py and change self.vfo to the frequency in
+Hertz.
+</p>
+<p>
+The frequency shown by the red tuning line and the frequency display
+window
+is always the transmit frequency.&nbsp; This equals the receive
+frequency unless Split is used (see below).&nbsp; The frequency display
+window will
+turn red to indicate sound capture (input ADC) overrun (clipping).<br>
+</p>
+The RIT (receiver incremental tuning) button and slider can add a small
+offset to the receive frequency.&nbsp;&nbsp; Leave RIT off for SSB
+unless
+a station is off frequency a bit; then use RIT to tune him in while
+leaving
+your transmit frequency unchanged.&nbsp; When you select CW, the RIT
+must be turned on to provide an audio output, so Quisk automatically
+turns on RIT and sets it
+to plus or minus cwTone.&nbsp; The audio side tone (if a hardware key
+line is used) is set to the same.&nbsp; Just click CWL or CWU, tune the
+frequency
+by clicking exactly on the signal, and everything will work. The value
+of
+cwTone can be changed in your configuration file.
+<p>If the Split button is pressed, a second green tuning line is shown
+to indicate the receive frequency, and the receive frequency can be
+independently adjusted.&nbsp; The mouse controls the closest tuning
+line.&nbsp; To receive on the transmit frequency again, just turn Split
+off.&nbsp; The Split feature is used to work a DX station operating
+split, or it can be used to easily switch between two arbitrary receive
+frequencies.<br>
+</p>
+<h3>Screen Sliders</h3>
+There are three sliders on the right of the Quisk screen.&nbsp; The
+first two are labeled Ys and Yz, and they control the scale and zero of
+the screen in view.&nbsp; For the Graph screen and the Rx Filter screen
+they control the scale and zero of the Y axis.&nbsp; For the Waterfall
+screen they control the Waterfall color scale; and if the Shift key is
+down, they control the upper graph Y axis.&nbsp; For the Scope screen
+the Ys slider controls the Y axis scale, and the Yz slider does
+nothing.&nbsp; The sliders have no effect on other screens.<br>
+<br>
+The Zo (zoom) slider expands the frequency scale (X axis) of the Graph
+and Waterfall screens so that narrow signals can be examined.&nbsp;
+Quisk operates normally when this slider is all the way down.&nbsp; As
+it is raised, the frequency is expanded around the tuning
+frequency.&nbsp; That is, the tuning frequency is moved to the center,
+and the frequency scale is expanded.&nbsp; It is still possible to tune
+Quisk as usual while this control is in use.&nbsp; For small frequency
+shifts, remember to use the right mouse button.<br>
+<br>
+<h3>Other Controls
+</h3>
+<p>
+The sliders on the left control the main volume (Vol) and side tone
+volume (STo).
+Side tone is only active if you configure Quisk to operate as a
+transceiver,
+and change is_key_down.c to provide a key signal.
+</p>
+<p>
+The two sliders on the right control the Y-axis scale (Ys) and zero
+point (Yz).
+On the graph screen, that means the range and zero of the graph. On the
+waterfall
+it means the gain and zero of the colors. Just try it.
+</p>
+<p>
+The first row of buttons on the left selects the band.
+The "Audio" band is meant to set the VFO frequency to zero for use
+with a sound card and no hardware control.
+The "Time" band selects standard time signals. Pressing this button
+repeatedly selects different frequencies. The remaining buttons select
+the amateur bands. The 60 meter button can be pressed repeatedly
+to select the channels. Adding bands requires changes to quisk.py and
+more band plans in your configuration file.
+</p>
+<p>
+The second and third row of buttons on the left select audio mute, AGC
+(automatic
+gain control), noise blanker and other features depending on your
+hardware.<br>
+</p>
+<p>
+The first row of buttons on the right selects the receive mode.
+The next row selects the filter to use. The filter bandwidths can be
+set in your config file.&nbsp; The right-most filter button bandwidth
+is adjustable; right-click it to adjust.&nbsp; The third row selects
+the
+screen to display: Graph, Waterfall, Scope, Config, Filter, or Help.
+</p>
+<p>
+The S-meter displays the signal strength in S units and in dB. Zero dB
+is
+clipping, the same as on the graph screen. The S-meter uses the
+specified
+filter bandwidth to choose the exact number of FFT bins to square and
+average.
+That is, it displays true RMS based on the FFT bins, not on the
+post-filter audio. Note
+that for a noise floor on the graph of -110 dB the S-meter will read
+-93 dB (depending
+on some details). That is
+because the bandwith specified is much greater than the FFT bin width,
+and more
+noise is getting through. Find a flat noise frequency, change the
+filter bandwidth,
+and watch your S-meter measure the noise. The conversion from S-units
+to dB depends
+on your hardware. There are 6 dB per S-unit, and you can change
+self.correct_smeter
+in your configuration file (in S-units) to adjust to 50 microvolts for
+S9. If the correction depends on the band, you can make a
+band-dependent
+correction in your hardware file.
+</p>
+<p>
+If you use the sound card for input, you may need to correct for small
+errors
+in the I and Q amplitude and phase. First change to the correct band,
+because
+corrections are saved for each band. Press the button on the config
+screen to bring up a correction screen. Then feed a test signal to your
+hardware
+(or use a strong available signal) and look at the signal image. Adjust
+the
+slider controls to reduce the image. The upper slider is the fine
+adjustment,
+and the lower is the coarse. You will need to adjust both amplitude and
+phase
+and they will interact.&nbsp; The amount of available adjustment range
+is controlled by your config file.&nbsp;
+When
+you have a final correction, it is a good idea to write it down.&nbsp;
+The correction point is saved based on the VFO frequency, and you will
+probably need two or three correction points per band.<br>
+</p>
+<p>
+Have fun with Quisk.
+</p>
+</body>
+</html>
