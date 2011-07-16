@@ -1,0 +1,32 @@
+This work was packaged for Debian by:
+
+    Jeremy Grosser <jeremy@synack.me> on Fri, 15 Jul 2011 22:18:13 -0700
+
+It was downloaded from:
+
+    http://james.ahlstrom.name/quisk/
+
+Upstream Author(s):
+
+    James C. Ahlstrom
+
+Copyright:
+
+	Copyright (C) 2011 James C. Ahlstrom
+
+License:
+
+    GNU General Public License (GPL) version 2
+	see "/usr/share/common-licenses/GPL-2".
+
+	PyUSB is included under the BSD license
+	see "/usr/share/common-licenses/BSD".
+
+	PyUSB Copyright (C) 2009-2010 Wander Lairson Costa.
+	All Rights Reserved.
+
+The Debian packaging is:
+
+    Copyright (C) 2011 Jeremy Grosser <jeremy@synack.me>
+	and is licensed under the GPL version 3,
+	see "/usr/share/common-licenses/GPL-3".
